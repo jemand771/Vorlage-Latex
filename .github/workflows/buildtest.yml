@@ -23,8 +23,15 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      - uses: xu-cheng/latex-action@v2
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Prepare Repo
+        run: |
+          mv Latex/inhalt_example Latex/inhalt
+          mv Latex/inhalt/metadaten.sty Latex/
+          mv Latex/inhalt/literatur.bib Latex/
+      - name: Build LaTeX
+        uses: xu-cheng/latex-action@v2
         with:
           root_file: main.tex
           working_directory: Latex/
