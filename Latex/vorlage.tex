@@ -1,11 +1,13 @@
 %! LaTeX Vorlage
-\documentclass[12pt, fleqn, captions=nooneline, titlepage, footsepline, headsepline, toc=sectionentrywithdots, listof=entryprefix, bibliography=totoc]{scrartcl}
+\documentclass[12pt, fleqn, captions=nooneline, titlepage, footsepline, headsepline, toc=sectionentrywithdots, listof=entryprefix, bibliography=totoc, parskip=half-]{scrartcl}
 
 \usepackage{silence} %unnötige Warnungen unterdrücken
 \WarningFilter{latex}{You have requested}
 \WarningFilter{scrlayer-scrpage}{\headheight to low}
 \WarningFilter{scrlayer-scrpage}{\footheight to low}
 \WarningFilter{scrlayer-scrpage}{Very small head height detected}
+\WarningFilter{fvextra}{}
+\WarningFilter{lineno}{}
 
 \ProvidesPackage{metadaten}
 \usepackage{metadaten}
@@ -14,9 +16,10 @@
 \usepackage[ngerman]{babel}
 \usepackage[backend=biber, style=authortitle, isbn=false]{biblatex}
 
+
+
 %! Das Inhaltsverzeichnis wird an dieser Stelle formatiert.
-\RedeclareSectionCommands[tocindent=0pt]{section, subsection, subsubsection}
-\RedeclareSectionCommands[tocnumwidth=45pt]{section, subsection, subsubsection}
+\RedeclareSectionCommands[beforeskip=-.1\baselineskip, afterskip=.1\baselineskip, tocindent=0pt, tocnumwidth=45pt]{section,subsection,subsubsection}
 
 %! Formatierung aller Verzeichnisse
 \renewcaptionname{ngerman}{\refname}{Quellenverzeichnis}
@@ -31,12 +34,7 @@
 
 %? Anhangsverzeichnis
 \providecaptionname{ngerman}{\listofatocentryname}{Anhang}
-\DeclareTOCStyleEntry[
-  level=0,
-  indent=50pt,
-  numwidth=5cm,
-  entrynumberformat={Anlage}
-]{tocline}{atoc}
+\DeclareTOCStyleEntry[level=0, indent=50pt, numwidth=5cm, entrynumberformat={Anlage}]{tocline}{atoc}
 
 \makeatletter
 \AfterTOCHead[atoc]{\let\if@dynlist\if@tocleft}
@@ -65,38 +63,87 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{tabularx}
+\usepackage{multirow}
 \usepackage{setspace} 
 \usepackage{booktabs}
 \usepackage{svg}
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage[a4paper,lmargin={2.5cm},rmargin={2.5cm},tmargin={2cm},bmargin={2cm}]{geometry}
+\usepackage{lineno}
 \usepackage{csquotes}
+
+%! Code Integration im Dokument
+%? Inklusive Erzeugung eines Custom Enviroments für Programmcodes
+\usepackage{minted}
+%\SetupFloatingEnvironment{listing}{name=Program code}
+%\SetupFloatingEnvironment{listing}{listname=List of Program Code}
+
+
+\DeclareNewTOC[
+  type=code,                         % Name der Umgebung
+  types=codes,                       % Erweiterung (\listofschemes)
+  float,                               % soll gleiten
+  floatpos=H,
+  tocentryentrynumberformat=\bfseries,                        % voreingestellte Gleitparameter
+  name=Code,                         % Name in Überschriften
+  listname={Programmcodeverzeichnis}, % Listenname
+  % counterwithin=chapter
+]{loc}
+\setuptoc{loc}{totoc}
+
+\renewcommand*{\codeformat}{%
+  \codename~\thecode%
+  \autodot{\space\space\space}
+}
+\BeforeStartingTOC[loc]{\renewcommand*\autodot{\space\space\space\space}}
+
+
+%! Lang ersehntes Formelumgebung / Formelverzeichnis
+\DeclareNewTOC[
+  type=formel,                         % Name der Umgebung
+  types=formeln,                       % Erweiterung (\listofschemes)
+  float,                               % soll gleiten
+  tocentryentrynumberformat=\bfseries,                        % voreingestellte Gleitparameter
+  name=Formel,                         % Name in Überschriften
+  listname={Formelverzeichnis}, % Listenname
+  % counterwithin=chapter
+]{lom}
+\setuptoc{lom}{totoc}
+\renewcommand*{\formelformat}{%
+  \formelname~\theformel%
+  \autodot{\space\space\space}
+}
+\BeforeStartingTOC[lom]{\renewcommand*\autodot{\space\space\space\space}}
+
 
 %! Schriftart
 \usepackage{helvet}
 \usepackage{microtype}
 \renewcommand{\familydefault}{\sfdefault}
-\usepackage[
-	hidelinks,
-	pdftitle={\titel},
-	pdfsubject={\kurzbeschreibung},
-	pdfauthor={\autoren},
-]{hyperref}
+%! Hyperref und PDF-meta
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={\titel}}
+\hypersetup{pdfsubject={\kurzbeschreibung}}
+\hypersetup{pdfauthor={\autoren}}
 \usepackage[numbered]{bookmark}
 \usepackage{acronym}
-\usepackage{caption}
+\usepackage{enumitem}
+
+
 
 \renewcommand*{\aclabelfont}[1]{\acsfont{#1}} %Abkürzungsverzeichnis - Formatierung
-\usepackage{listings} %zB zum korrekten anzeigen von BASH-Befehlen
-\lstset{ %listings Einstellungen
-  breaklines=true,
-  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
-}
+ %zB zum korrekten anzeigen von BASH-Befehlen
+
 
 %! Caption um Tabellen und Abbildungen richtig zu beschriften
 \usepackage{caption}
-\captionsetup{labelsep=none}
+% Captions linksbündig auch wenn einzeilig
+\captionsetup{
+  labelsep=none,
+  justification=raggedright,
+  singlelinecheck=false
+}
 \renewcommand*{\figureformat}{%
   \figurename~\thefigure%
   \autodot{\space\space\space}
@@ -105,6 +152,9 @@
   \tablename~\thetable%
   \autodot{\space\space\space}
 }
+
+
+
 
 %! Formatierung des Literaturverzeichnis
 \DeclareFieldFormat{url}{In: \url{#1}}
@@ -166,10 +216,11 @@
 %! Kopf- und Fußzeile
 \usepackage[automark]{scrlayer-scrpage} 
 \pagestyle{scrheadings} 
-\clearscrheadings 
-\clearscrplain
+\clearmainofpairofpagestyles 
+\clearplainofpairofpagestyles
 \renewcommand*{\sectionmarkformat}{}
 \rohead{\textnormal{\headmark}}
+\lohead{\includegraphics[height=8mm]{bilder/logo.png}}
 \lofoot{} 
 \cofoot{} 
 \rofoot{\textnormal{Seite}~\pagemark}
@@ -230,8 +281,8 @@
   \newpage
   \pagenumbering{gobble}
   \pagestyle{scrheadings} 
-  \clearscrheadings 
-  \clearscrplain 
+  \clearmainofpairofpagestyles 
+  \clearplainofpairofpagestyles
   \rohead{\textnormal{Anhang~\arabic{section}}}
   \lohead{\textnormal{\currentname}}
   \lofoot{} 
@@ -240,13 +291,14 @@
 }{}{}
 
 % ? Ab hier beginnen eigene Befehle um den Umgang zu erleichtern   
-\newcommand{\absatz}{\vspace{12pt}\noindent}
 \newcommand{\logisch}[1]{$``#1``$}
-\newcommand{\bild}[3][1.0]{\begin{figure}[H]
+\newcommand{\bild}[4][1.0]{\begin{figure}[H]
                       \centering
                       \includegraphics[width=#1\columnwidth]{bilder/#2}
                       \caption{#3}
-                      \label{fig:#3}
+                      \label{fig:#4}
                       \end{figure}}
-\newcommand{\fullref}[1]{(siehe Kapitel \ref{#1} \nameref{#1})}
+\newcommand{\fullref}[1]{(siehe Kapitel~\ref{#1}~-~\nameref{#1})}
 \newcommand{\striche}[1]{\glqq #1\grqq{}}
+\newcommand{\vglink}[2]{\footnote{\hspace{0.5em}vgl.~\href{#1}{#1}~(#2)}}
+\newcommand{\python}[1]{\mintinline{python}{#1}}
