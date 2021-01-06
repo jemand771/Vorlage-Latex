@@ -16,9 +16,9 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  Build LaTeX:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -30,16 +30,17 @@ jobs:
           mv Latex/inhalt_example Latex/inhalt
           mv Latex/inhalt/metadaten.sty Latex/
           mv Latex/inhalt/literatur.bib Latex/
-      - name: Build LaTeX
-        run: |
-          docker run --rm -v $GITHUB_WORKSPACE/Latex:/latex jemand771/bagc-latex-build
+      - name: Pull image
+        run: docker pull jemand771/bagc-latex-build
+      - name: Build PDF
+        run: docker run --rm -v $GITHUB_WORKSPACE/Latex:/latex jemand771/bagc-latex-build
       - name: 'Upload Artifact: main.log'
         uses: actions/upload-artifact@v2
         with:
-          name: log-file
+          name: main.log
           path: Latex/main.log
       - name: 'Upload Artifact: main.pdf'
         uses: actions/upload-artifact@v2
         with:
-          name: output-pdf
+          name: main.pdf
           path: Latex/main.pdf
