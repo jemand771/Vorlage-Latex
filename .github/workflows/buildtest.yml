@@ -31,8 +31,15 @@ jobs:
           mv Latex/inhalt/metadaten.sty Latex/
           mv Latex/inhalt/literatur.bib Latex/
       - name: Build LaTeX
-        uses: xu-cheng/latex-action@v2
+        run: |
+          docker run --rm -v $GITHUB_WORKSPACE/Latex:/latex jemand771/bagc-latex-build
+      - name: 'Upload Artifact: main.log'
+        uses: actions/upload-artifact@v2
         with:
-          root_file: main.tex
-          working_directory: Latex/
-          latexmk_shell_escape: true
+          name: log-file
+          path: Latex/main.log
+      - name: 'Upload Artifact: main.pdf'
+        uses: actions/upload-artifact@v2
+        with:
+          name: output-pdf
+          path: Latex/main.pdf
