@@ -24,6 +24,10 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - uses: xu-cheng/latex-action@v2
+      #- uses: xu-cheng/latex-action@v2
+      #  with:
+      #    root_file: Latex/main.tex
+      # docker run --rm -v \"${workspaceFolder}/Latex:/latex\" jemand771/latex-build
+      - uses: docker://jemand771/latex-build
         with:
-          root_file: Latex/main.tex
+          entrypoint: ls /
