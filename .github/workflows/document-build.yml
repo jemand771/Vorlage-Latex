@@ -15,7 +15,7 @@ jobs:
       - name: Build PDF
         run: docker run --rm -v "$GITHUB_WORKSPACE/Latex:/latex" -u $(id -u ${USER}):$(id -g ${USER}) jemand771/latex-build
       - name: Archive PDF
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v1
         with:
           name: main.pdf
           path: Latex/main.pdf
