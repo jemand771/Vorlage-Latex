@@ -28,6 +28,8 @@ jobs:
         run: docker pull jemand771/latex-build
       - name: Build PDF
         run: docker run --rm -v "$GITHUB_WORKSPACE/Latex:/latex" jemand771/latex-build
+      - name: debug ls
+        run: ls -la $GITHUB_WORKSPACE/Latex
       - name: Archive PDF
         uses: actions/upload-artifact@v2
         with:
