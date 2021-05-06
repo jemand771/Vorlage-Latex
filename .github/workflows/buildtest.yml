@@ -28,4 +28,4 @@ jobs:
       #  with:
       #    root_file: Latex/main.tex
       # docker run --rm -v \"${workspaceFolder}/Latex:/latex\" jemand771/latex-build
-      - runs: docker run --rm -v "$$GITHUB_WORKSPACE/Latex:/latex" jemand771/latex-build
+      - run: docker run --rm -v "$$GITHUB_WORKSPACE/Latex:/latex" jemand771/latex-build
