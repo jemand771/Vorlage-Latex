@@ -30,4 +30,4 @@ jobs:
       # docker run --rm -v \"${workspaceFolder}/Latex:/latex\" jemand771/latex-build
       - uses: docker://jemand771/latex-build
         with:
-          entrypoint: ls /
+          command: ls /
