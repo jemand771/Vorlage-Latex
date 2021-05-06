@@ -28,7 +28,10 @@ jobs:
       #  with:
       #    root_file: Latex/main.tex
       # docker run --rm -v \"${workspaceFolder}/Latex:/latex\" jemand771/latex-build
-      - name: Cache docker image
+      # this is kinda hacky
+      - name: Prepare docker for caching
+        run: sudo chmod -R 777 /var/lib/docker
+      - name: Get docker image from cache
         uses: actions/cache@v2
         with:
           path: /var/lib/docker/overlay2
