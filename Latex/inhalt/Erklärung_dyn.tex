@@ -5,7 +5,7 @@
 \newcommand{\fmtSub}{\pyc{print("Wir" if len(autoren) > 1 else "Ich", end="")}}
 \newcommand{\fmtmy}{\pyc{print("unsere Belegarbeit" if len(autoren) > 1 else "meinen Praxisbeleg", end="")}}
 
-%	Eidesstattliche Erklärung
+%    Eidesstattliche Erklärung
 
 \cleardoublepage 
 \section{Ehrenwörtliche Erklärung}
@@ -18,19 +18,19 @@
 \fmtSub erkläre\fmtn hiermit ehrenwörtlich,
 
 \begin{enumerate}
-	\vspace{1cm}
-	\item dass \fmtsub \fmtmy mit dem Thema:\\
-	
-	\textbf{\pyc{print(data["titel"], end="")}}\\
+    \vspace{1cm}
+    \item dass \fmtsub \fmtmy mit dem Thema:\\
+    
+    \textbf{\pyc{print(data["titel"], end="")}}\\
 
-	ohne fremde Hilfe angefertigt habe\pyc{print("n" if len(autoren) > 1 else "", end=",")}
-	\item dass \fmtsub die Übernahme wörtlicher Zitate aus der Literatur sowie die\\ 		  
-	Verwendung der Gedanken anderer Autoren an den entsprechenden\\
-	Stellen innerhalb der Arbeit gekennzeichnet habe\fmtn und
-	\item dass \fmtsub \fmtmy bei keiner anderen Prüfung vorgelegt habe\pyc{print("n" if len(autoren) > 1 else "", end=".")}\\[1,5cm]
+    ohne fremde Hilfe angefertigt habe\pyc{print("n" if len(autoren) > 1 else "", end=",")}
+    \item dass \fmtsub die Übernahme wörtlicher Zitate aus der Literatur sowie die\\           
+    Verwendung der Gedanken anderer Autoren an den entsprechenden\\
+    Stellen innerhalb der Arbeit gekennzeichnet habe\fmtn und
+    \item dass \fmtsub \fmtmy bei keiner anderen Prüfung vorgelegt habe\pyc{print("n" if len(autoren) > 1 else "", end=".")}\\[1,5cm]
 \end{enumerate}
 \fmtSub \pyc{print("sind uns" if len(autoren) > 1 else "bin mir", end="")}bewusst, dass eine falsche Erklärung rechtliche Folgen haben wird.\\[1,5cm]
-		
+        
 \vfill
 
 Glauchau, \abgabedatum\newline\noindent\rule{0.35\columnwidth}{0.4pt}\hspace{0.05\columnwidth}\rule{0.6\columnwidth}{0.4pt}\\
@@ -38,3 +38,115 @@ Ort, Datum\hspace{0.27\columnwidth}Unterschrift\pyc{if len(autoren) > 1: print("
 
 {\footnotesize Dies ist eine zur Nutzung mit \pyc{print("mehreren Autoren und " if len(autoren) > 1 else "", end="")}\LaTeX\ angepasste Version der in \href{https://www.ba-glauchau.de/fileadmin/glauchau/waehrend-des-studium/dokumente/pruefungen/4BA-F.207_Hinweise_zur_Anfertigung_wissenschaftlicher_Arbeiten.pdf}{Anhang 4 der Hinweise zur Anfertigung wissenschaftlicher Arbeiten an der Staatlichen Studienakademie Glauchau vorgegebenen ehrenwörtlichen Erklärung.}}
 
+\newpage
+\section{Zustimmung Plagiatsprüfung}
+
+\vspace*{2mm}
+
+\begin{minipage}{0.5\columnwidth}
+\includesvg[width=\columnwidth]{bilder/ba_glauchau_logo.svg}
+%alternativ mit PNG Logo, falls Inkscape nicht installiert werden, bzw. nicht der PATH-Variable hinzugefügt werden soll
+%MERKE: die SVG-Version sieht im Druck deutlich besser aus
+%\includegraphics[width=\columnwidth]{bilder/ba-gc-logo.png}
+\end{minipage}
+\begin{minipage}{0.45\columnwidth}
+\begin{flushright}
+{\small nach 4BA-F.219\\}
+\end{flushright}
+\end{minipage}
+\vspace*{2mm}
+
+\begin{center}\textbf{\huge{Erklärung zur Prüfung wissenschaftlicher Arbeiten}}\end{center}
+
+Die Bewertung wissenschaftlicher Arbeiten erfordert die Prüfung auf Plagiate. Die hierzu von der Staatlichen Studienakademie Glauchau eingesetzte Prüfungskommission nutzt sowohl eigene Software als auch diesbezügliche Leistungen von Drittanbietern. Dies erfolgt gemäß \href{https://www.revosax.sachsen.de/vorschrift/1672-Saechsisches-Datenschutzgesetz#p7}{§ 7 des Gesetzes zum Schutz der informationellen Selbstbestimmung im Freistaat Sachsen (Sächsisches Datenschutzgesetz - SächsDSG)} vom 25. August 2003 (Rechtsbereinigt mit Stand vom 31. Juli 2011) im Sinne einer Datenverarbeitung im Auftrag.
+
+\pyc{print("Die Studierenden bevollmächtigen" if len(autoren) > 1 else "Der Studierende bevollmächtigt", end="")}die Mitglieder der Prüfungskommission hiermit zur Inanspruchnahme o. g. Dienste. In begründeten Ausnahmefällen kann der Datenschutzbeauftragte der Berufsakademie Sachsen sowohl von den Verfassern der wissenschaftlichen Arbeit als auch von der Prüfungskommission in den Entscheidungsprozess einbezogen werden.
+
+\arrayrulewidth=0.5pt
+
+\begin{pycode}
+
+# TODO move to common place
+t_n = "n" if len(autoren) > 1 else ""
+t_en = "en" if len(autoren) > 1 else ""
+
+def make_oldstyle_plerkl():
+    left_col_type = "X" if len(autoren) > 1 else "p{3cm}"
+    right_col_type = "Y" if len(autoren) > 1 else "X"
+    print(r"\begin{table}[H] \centering")
+    print(r"\newcolumntype{Y}{>{\centering\arraybackslash}X}")
+    print(r"\begin{tabularx}{\columnwidth}{|" + left_col_type + "|" + (right_col_type + "|") * len(autoren) + "}")
+    print(r"\hline")
+    print(oldstyle_tableline(
+        "Name" + t_n + ":",
+        *map(lambda x: x["name"], autoren)
+    ))
+    print(oldstyle_tableline(
+        "Matrikelnummer" + t_n + ":",
+        *map(str, map(lambda x: x["matnum"], autoren))
+    ))
+    print(oldstyle_tableline(
+        "Studiengänge:" if len(autoren) > 1 else "Studiengang:",
+        *map(lambda x: x["studiengang"], autoren)
+    ))
+    print(oldstyle_tableline(
+        "Titel der Arbeit:",
+        make_multicol(data["titel"])
+    ))
+    print(oldstyle_tableline(
+        "Datum:",
+        *len(autoren) * [data["datum"]]
+	))
+    print(oldstyle_tableline(
+        "Unterschrift" + t_en + ":",
+        *len(autoren) * [""],
+        hline=False
+    ))
+    print(oldstyle_tableline(*(len(autoren) + 1) * [""]))
+
+    print(r"\end{tabularx} \end{table}")
+
+def oldstyle_tableline(*args, hline=True):
+    return " & ".join(args) + r"\\" + (r"\hline" if hline else "")
+
+def make_multicol(text):
+    if len(autoren) == 1:
+        return text
+    factor = len(autoren) / (len(autoren) + 1) - 0.03
+    return (
+        r"\multicolumn{"
+        + str(len(autoren))
+        + "}{p{"
+        + str(round(factor, 2))
+        + r"\columnwidth"
+        + r"}|}{\centering "
+        + text
+        + "} "
+    )
+
+def make_plerkl():
+    make_oldstyle_plerkl()
+
+make_plerkl()
+\end{pycode}
+    
+%\hline
+%    Namen: & Max Mustermann & Zweiter Name & Ich bin sehr & kreativ, jaja. sehr.%\\
+%    \hline
+%    Matikel-Nr.: & 4206969 & 4206969 & 4206969 & abacadabra\\
+%    \hline
+%    Studiengang: & \multicolumn{4}{c|}{aaaaaaaaaaa}\\
+%    \hline
+%    Titel der Arbeit: & \multicolumn{4}{p{0.77\columnwidth}|}{\centering I}\\
+%    %& \multicolumn{3}{c|}{3-Bit-Additions-Subtraktionswerks}\\
+%    \hline
+%    Datum: & \multicolumn{4}{c|}{now}\\
+%    \hline
+%    Unterschriften: & & & &\\
+%    & & & & \\
+%    \hline
+
+
+\vfill
+
+{\footnotesize Dies ist eine zur Nutzung mit \pyc{print("mehreren Autoren und " if len(autoren) > 1 else "", end="")}\LaTeX\ angepasste Version der in \href{https://www.ba-glauchau.de/fileadmin/glauchau/waehrend-des-studium/dokumente/pruefungen/4BA-F.207_Hinweise_zur_Anfertigung_wissenschaftlicher_Arbeiten.pdf}{Anhang 6 der Hinweise zur Anfertigung wissenschaftlicher Arbeiten an der Staatlichen Studienakademie Glauchau vorgegebenen Zustimmung zur Plagiatsprüfung.}}
