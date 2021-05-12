@@ -1,0 +1,40 @@
+
+% hilfsbefehle für singular/plural
+\newcommand{\fmtn}{\pyc{print("n" if len(autoren) > 1 else "{}", end="")}}
+\newcommand{\fmtsub}{\pyc{print("wir" if len(autoren) > 1 else "ich", end="")}}
+\newcommand{\fmtSub}{\pyc{print("Wir" if len(autoren) > 1 else "Ich", end="")}}
+\newcommand{\fmtmy}{\pyc{print("unsere Belegarbeit" if len(autoren) > 1 else "meinen Praxisbeleg", end="")}}
+
+%	Eidesstattliche Erklärung
+
+\cleardoublepage 
+\section{Ehrenwörtliche Erklärung}
+\vspace*{1cm}
+\begin{center}
+\huge\textbf{Ehrenwörtliche Erklärung}\\
+\end{center}
+\vspace*{1cm}
+\normalsize
+\fmtSub erkläre\fmtn hiermit ehrenwörtlich,
+
+\begin{enumerate}
+	\vspace{1cm}
+	\item dass \fmtsub \fmtmy mit dem Thema:\\
+	
+	\textbf{\pyc{print(data["titel"], end="")}}\\
+
+	ohne fremde Hilfe angefertigt habe\pyc{print("n" if len(autoren) > 1 else "", end=",")}
+	\item dass \fmtsub die Übernahme wörtlicher Zitate aus der Literatur sowie die\\ 		  
+	Verwendung der Gedanken anderer Autoren an den entsprechenden\\
+	Stellen innerhalb der Arbeit gekennzeichnet habe\fmtn und
+	\item dass \fmtsub \fmtmy bei keiner anderen Prüfung vorgelegt habe\pyc{print("n" if len(autoren) > 1 else "", end=".")}\\[1,5cm]
+\end{enumerate}
+\fmtSub \pyc{print("sind uns" if len(autoren) > 1 else "bin mir", end="")}bewusst, dass eine falsche Erklärung rechtliche Folgen haben wird.\\[1,5cm]
+		
+\vfill
+
+Glauchau, \abgabedatum\newline\noindent\rule{0.35\columnwidth}{0.4pt}\hspace{0.05\columnwidth}\rule{0.6\columnwidth}{0.4pt}\\
+Ort, Datum\hspace{0.27\columnwidth}Unterschrift\pyc{if len(autoren) > 1: print("en", end="")}
+
+{\footnotesize Dies ist eine zur Nutzung mit \pyc{print("mehreren Autoren und " if len(autoren) > 1 else "", end="")}\LaTeX\ angepasste Version der in \href{https://www.ba-glauchau.de/fileadmin/glauchau/waehrend-des-studium/dokumente/pruefungen/4BA-F.207_Hinweise_zur_Anfertigung_wissenschaftlicher_Arbeiten.pdf}{Anhang 4 der Hinweise zur Anfertigung wissenschaftlicher Arbeiten an der Staatlichen Studienakademie Glauchau vorgegebenen ehrenwörtlichen Erklärung.}}
+
