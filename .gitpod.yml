@@ -2,4 +2,4 @@
 tasks:
 # even though will be updated by starting the default build task in in tasks.json for docker >=20 (--pull always),
 # having the image inside the workspace already saves time when building for the first time in a new gitpod
-    init: docker pull jemand771/latex-build
+  - init: docker pull jemand771/latex-build
