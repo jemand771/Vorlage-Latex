@@ -3,4 +3,4 @@ tasks:
   - before: sudo apt-get update && sudo apt-get install -y docker-ce docker-ce-cli
 # even though will be updated by starting the default build task in in tasks.json (--pull always),
 # having the image inside the workspace already saves time when opening multiple pods
-  - init: docker pull jemand771/latex-build
+    init: docker pull jemand771/latex-build
