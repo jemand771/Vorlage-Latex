@@ -5,6 +5,3 @@ tasks:
   - init: docker pull jemand771/latex-build
 # install pdf viewer
   - command: wget -O /tmp/pdf_viewer.vsix https://github.com/tomoki1207/vscode-pdfviewer/releases/download/v1.0.0/pdf-1.0.0.vsix && code --install-extension /tmp/pdf_viewer.vsix && rm /tmp/pdf_viewer.vsix
-vscode:
-  extensions:
-    - tomoki1207.pdf
