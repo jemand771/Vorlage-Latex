@@ -6,7 +6,7 @@
         {
             "label": "Build LaTeX using Docker",
             "type": "shell",
-            "command": "docker run --pull always -u $(id -u ${USER}):$(id -g ${USER}) --rm -v \"${workspaceFolder}/Latex:/latex\" jemand771/latex-build",
+            "command": "docker pull jemand771/latex-build && docker run -u $(id -u ${USER}):$(id -g ${USER}) --rm -v \"${workspaceFolder}/Latex:/latex\" jemand771/latex-build",
                 "problemMatcher":[
                     {
                         "owner":"latex",
