@@ -4,7 +4,7 @@ tasks:
 # having the image inside the workspace already saves time when building for the first time in a new gitpod
   - init: docker pull jemand771/latex-build
 # install pdf viewer
-  - command: wget -O pdf_viewer.vsix https://github-releases.githubusercontent.com/71839621/a7019980-b163-11ea-95b3-120d6d3adb2a && code --install-extension ./pdf_viewer.vsix && rm pdf_viewer.vsix
+  - command: wget -O pdf_viewer.vsix https://github.com/tomoki1207/vscode-pdfviewer/releases/download/v1.0.0/pdf-1.0.0.vsix && code --install-extension ./pdf_viewer.vsix && rm pdf_viewer.vsix
 vscode:
   extensions:
     - tomoki1207.pdf
