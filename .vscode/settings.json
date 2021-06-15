@@ -5,6 +5,20 @@
     "ShortcutMenuBar.navigateForward": false,
     "ShortcutMenuBar.navigateBack": false,
     "ShortcutMenuBar.beautify": false,
-    "latex-workshop.latex.tools": [],
-    "latex-workshop.latex.recipes": []
+    "latex-workshop.latex.tools": [
+        {
+            "name": "warning",
+            "command": "echo",
+            "args": ["ERROR: Document not compiled. Use the preconfigured build task (ctrl+shift+b by default) instead of LaTeX workshop recipes."],
+            "env": {}
+        }
+    ],
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "default",
+            "tools": [
+                "warning"
+            ]
+        }
+    ]
 }
