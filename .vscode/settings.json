@@ -1,10 +1,4 @@
 {
-    "ShortcutMenuBar.userButton01Command": "workbench.action.tasks.runTask|Build LaTeX using Docker",
-    "ShortcutMenuBar.toggleTerminal": false,
-    "ShortcutMenuBar.openFilesList": false,
-    "ShortcutMenuBar.navigateForward": false,
-    "ShortcutMenuBar.navigateBack": false,
-    "ShortcutMenuBar.beautify": false,
     "latex-workshop.view.pdf.viewer": "tab",
     "latex-workshop.latex.tools": [
         {
