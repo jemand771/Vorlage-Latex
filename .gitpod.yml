@@ -6,7 +6,7 @@ tasks:
 
 vscode:
   extensions:
-    - James-Yu.latex-workshop
-    - CoenraadS.bracket-pair-colorizer
     - aaron-bond.better-comments
     - anweber.statusbar-commands
+    - CoenraadS.bracket-pair-colorizer
+    - James-Yu.latex-workshop
