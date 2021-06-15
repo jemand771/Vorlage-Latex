@@ -20,10 +20,28 @@
         {
             "alignment": "left",
             "tooltip": "Build LaTeX using Docker",
-            "text": "$(beaker) Build",
+            "text": "$(gear)",
             "command": "workbench.action.tasks.runTask",
             "arguments": [
                 "Build LaTeX using Docker"
+            ]
+        },
+        {
+            "alignment": "left",
+            "tooltip": "Build + Refresh",
+            "text": "$(beaker) Build",
+            "command": "workbench.action.tasks.runTask",
+            "arguments": [
+                "Build + Refresh"
+            ]
+        },
+        {
+            "alignment": "left",
+            "tooltip": "Delete temporary files",
+            "text": "$(file)",
+            "command": "workbench.action.tasks.runTask",
+            "arguments": [
+                "Delete temporary files"
             ]
         },
         {
@@ -35,17 +53,11 @@
         {
             "alignment": "left",
             "tooltip": "Refresh viewers",
-            "text": "$(refresh) View",
-            "command": "latex-workshop.refresh-viewer"
-        },
-        {
-            "alignment": "left",
-            "tooltip": "Delete temporary files",
-            "text": "$(file) Clean",
+            "text": "$(refresh)",
             "command": "workbench.action.tasks.runTask",
             "arguments": [
-                "Delete temporary files"
+                "Refresh Viewer"
             ]
-        }
+        },
     ]
 }

@@ -37,10 +37,7 @@
                     }
                 }
             ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
+            "group": "build",
             "windows": {
                 "command": "docker run --pull always --rm -v \"${workspaceFolder}/Latex:/latex\" jemand771/latex-build"
             }
@@ -55,6 +52,24 @@
             "presentation": {
                 "reveal": "never"
             }
+        },
+        {
+            "label": "Build + Refresh",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Build LaTeX using Docker",
+                "Refresh Viewer"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Refresh Viewer",
+            "command": "${command:latex-workshop.refresh-viewer}",
+            "problemMatcher": []
         }
     ]
 }
