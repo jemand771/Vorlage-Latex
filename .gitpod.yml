@@ -3,12 +3,10 @@ tasks:
 # even though will be updated by starting the default build task in in tasks.json for docker >=20 (--pull always),
 # having the image inside the workspace already saves time when building for the first time in a new gitpod
   - command: docker pull jemand771/latex-build && exit
-# install pdf viewer
-  - command: wget -O /tmp/pdf_viewer.vsix https://github.com/tomoki1207/vscode-pdfviewer/releases/download/v1.0.0/pdf-1.0.0.vsix && until code --install-extension /tmp/pdf_viewer.vsix &> /dev/null; do sleep 1; done && rm /tmp/pdf_viewer.vsix && echo vscode extension setup done && exit
 
 vscode:
   extensions:
     - James-Yu.latex-workshop
     - CoenraadS.bracket-pair-colorizer
     - aaron-bond.better-comments
-    - jerrygoyal.shortcut-menu-bar
+    - anweber.statusbar-commands

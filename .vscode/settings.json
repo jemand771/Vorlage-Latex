@@ -5,6 +5,7 @@
     "ShortcutMenuBar.navigateForward": false,
     "ShortcutMenuBar.navigateBack": false,
     "ShortcutMenuBar.beautify": false,
+    "latex-workshop.view.pdf.viewer": "tab",
     "latex-workshop.latex.tools": [
         {
             "name": "warning",
@@ -18,6 +19,38 @@
             "name": "default",
             "tools": [
                 "warning"
+            ]
+        }
+    ],
+    "statusbar_command.commands": [
+        {
+            "alignment": "left",
+            "tooltip": "Build LaTeX using Docker",
+            "text": "$(beaker) Build",
+            "command": "workbench.action.tasks.runTask",
+            "arguments": [
+                "Build LaTeX using Docker"
+            ]
+        },
+        {
+            "alignment": "left",
+            "tooltip": "Open main.pdf",
+            "text": "$(file-pdf)",
+            "command": "latex-workshop.view"
+        },
+        {
+            "alignment": "left",
+            "tooltip": "Refresh viewers",
+            "text": "$(refresh) View",
+            "command": "latex-workshop.refresh-viewer"
+        },
+        {
+            "alignment": "left",
+            "tooltip": "Delete temporary files",
+            "text": "$(file) Clean",
+            "command": "workbench.action.tasks.runTask",
+            "arguments": [
+                "Delete temporary files"
             ]
         }
     ]
