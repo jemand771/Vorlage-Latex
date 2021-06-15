@@ -1,0 +1,12 @@
+
+tasks:
+# even though will be updated by starting the default build task in in tasks.json for docker >=20 (--pull always),
+# having the image inside the workspace already saves time when building for the first time in a new gitpod
+  - command: docker pull jemand771/latex-build && exit
+
+vscode:
+  extensions:
+    - anweber.statusbar-commands@1.6.0
+    - aaron-bond.better-comments
+    - CoenraadS.bracket-pair-colorizer
+    - James-Yu.latex-workshop
