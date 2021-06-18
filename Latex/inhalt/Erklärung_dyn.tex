@@ -77,36 +77,36 @@ def make_oldstyle_plerkl():
     print(r"\newcolumntype{Y}{>{\centering\arraybackslash}X}")
     print(r"\begin{tabularx}{\columnwidth}{|" + left_col_type + "|" + (right_col_type + "|") * len(autoren) + "}")
     print(r"\hline")
-    print(oldstyle_tableline(
+    print(tableline(
         "Name" + t_n + ":",
         *map(lambda x: x["name"], autoren)
     ))
-    print(oldstyle_tableline(
+    print(tableline(
         "Matrikelnummer" + t_n + ":",
         *map(str, map(lambda x: x["matnum"], autoren))
     ))
-    print(oldstyle_tableline(
+    print(tableline(
         "Studiengänge:" if len(autoren) > 1 else "Studiengang:",
         *map(lambda x: x["studiengang"], autoren)
     ))
-    print(oldstyle_tableline(
+    print(tableline(
         "Titel der Arbeit:",
         make_multicol(data["titel"])
     ))
-    print(oldstyle_tableline(
+    print(tableline(
         "Datum:",
         *len(autoren) * [data["datum"]]
 	))
-    print(oldstyle_tableline(
+    print(tableline(
         "Unterschrift" + t_en + ":",
         *len(autoren) * [""],
         hline=False
     ))
-    print(oldstyle_tableline(*(len(autoren) + 1) * [""]))
+    print(tableline(*(len(autoren) + 1) * [""]))
 
     print(r"\end{tabularx} \end{table}")
 
-def oldstyle_tableline(*args, hline=True):
+def tableline(*args, hline=True):
     return " & ".join(args) + r"\\" + (r"\hline" if hline else "")
 
 def make_multicol(text):
@@ -124,8 +124,36 @@ def make_multicol(text):
         + "} "
     )
 
+def make_newstyle_plerkl():
+    print(r"\begin{table}[H]")
+    #col_specifiers = "|".join(map(
+    #    lambda x: r">{\hsize=" + x + r"\hsize}X",
+    #    map(str, (".4", 1.2, 1.2, 1.2))))
+    col_specifiers = "|".join(["X"] * 5)
+    print(r"\begin{tabularx}{\linewidth}{|" + col_specifiers + "|}")
+    print(r"\hline")
+    print(tableline("Name", "Matrikelnummer", "Studiengang", "Datum", "Unterschrift"))
+    for a in autoren:
+        print(tableline(
+            a["name"],
+            str(a["matnum"]),
+            a["studiengang"],
+            data["datum"],
+            r"\par"
+        ))
+    # NOTE current development status:
+    # - generating old or new tables works
+    # - old tables up to 3 (4 with abbreviation), new tables up to 6
+    # - title is missing from new table
+    # - make the title page even more dynamic (reduce space for 6+ authors)
+    # - add global switches for enbaling/disabling dynamic behavior
+    # - move common code away from title page
+    # - maybe center cells in old table vertically (shorter names look like they're floating)
+    print(r"\end{tabularx}")
+    print(r"\end{table}")
+
 def make_plerkl():
-    make_oldstyle_plerkl()
+    make_newstyle_plerkl()
 
 make_plerkl()
 \end{pycode}
